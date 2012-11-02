@@ -29,7 +29,7 @@ module.exports = (robot) ->
     robot.router.post "/beta_invites", (req, res) ->
       body = qs.stringify({
         room_id: 'BandFrame',
-        message: "event from MAILCHIMP: #{JSON.stringify req.body}",
+        message: "If you ship it, they will come: #{req.body[email]} just subscribed to the launch list.",
         from: "Dude Bot"
       })
       options = {
