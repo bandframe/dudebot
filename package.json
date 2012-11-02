@@ -17,7 +17,7 @@
   "dependencies": {
     "hubot": "2.3.4",
     "hubot-scripts": ">= 2.1.0",
-    "hubot-hipchat": "https://github.com/chrisabruce/hubot-hipchat/tarball/master",
+    "hubot-hipchat": ">= 1.1.1",
     "optparse": "1.0.3"
   },
 

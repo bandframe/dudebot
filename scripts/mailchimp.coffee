@@ -23,7 +23,7 @@ module.exports = (robot) ->
 
     robot.router.post "/beta_invites", (req, res) ->
       res.end ''
-      robot.messageRoom('BandFrame', "EVENT FROM MAILCHIMP: #{req.body}")
+      robot.send {room: '27319_bandframe@conf.hipchat.com'}, 'BandFrame', "EVENT FROM MAILCHIMP: #{req.body}"
   # robot.router.get "/hubot/version", (req, res) ->
   #   res.end robot.version
   #
