@@ -1,5 +1,5 @@
 # Description:
-#   Messing around with the YouTube API.
+#   Keep the dude's thinking from getting too uptight.
 #
 # Commands:
 #   hubot botbeer - Give the dude a beer
