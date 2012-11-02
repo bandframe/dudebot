@@ -18,24 +18,33 @@
 
 
 module.exports = (robot) ->
+
+    http = require 'http'
+    qs = require 'querystring'
+    AUTH_TOKEN = 'a8bf7a1006276ecdd7db8e6287336d'
+
     robot.router.get "/beta_invites", (req, res) ->
       res.end "POST a Mailchimp event to this URL"
 
     robot.router.post "/beta_invites", (req, res) ->
+      body = qs.stringify({
+        room_id: 'BandFrame',
+        message: "event from MAILCHIMP: #{JSON.stringify req.body}",
+        from: "Dude Bot"
+      })
+      options = {
+        host: 'api.hipchat.com',
+        port: 80,
+        path: "/v1/rooms/message?notify=true&color=gray&auth_token=#{AUTH_TOKEN}",
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': body.length
+        }
+      }
+      post = http.request options, (res) ->
+        res.on 'data', (chunk) ->
+          console.log('received from mailchimp: ' + chunk)
+      post.write body
+      post.end
       res.end ''
-      robot.send {room: '27319_bandframe@conf.hipchat.com'}, 'BandFrame', "EVENT FROM MAILCHIMP: #{req.body}"
-  # robot.router.get "/hubot/version", (req, res) ->
-  #   res.end robot.version
-  #
-  # robot.router.post "/hubot/ping", (req, res) ->
-  #   res.end "PONG"
-  #
-  # robot.router.get "/hubot/time", (req, res) ->
-  #   res.end "Server time is: #{new Date()}"
-  #
-  # robot.router.get "/hubot/info", (req, res) ->
-  #   child = spawn('/bin/sh', ['-c', "echo I\\'m $LOGNAME@$(hostname):$(pwd) \\($(git rev-parse HEAD)\\)"])
-  #
-  #   child.stdout.on 'data', (data) ->
-  #     res.end "#{data.toString().trim()} running node #{process.version} [pid: #{process.pid}]"
-  #     child.stdin.end()
