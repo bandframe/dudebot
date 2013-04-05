@@ -15,7 +15,7 @@ module.exports = (robot) ->
     "spark it up then!"
   ]
 
-  random = (list) -> list[Math.floor(Math.random() * list.length)]
+  random = (list) -> "(dudebotcrunked) " + list[Math.floor(Math.random() * list.length)]
 
   robot.respond /(botbowl)/i, (msg) ->
     msg.send random(BOWLS)
